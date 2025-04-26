@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from model.CampoItem import CampoItem
+from model.Item import CampoItem
 
 class GrupoPontuacao:
     def __init__(self, parent, nome, remove_callback):
@@ -22,7 +22,6 @@ class GrupoPontuacao:
             "<Configure>",
             lambda e: self.canvas.itemconfigure(self.canvas_window, width=e.width)
         )
-        # Bind mouse wheel only on overflow
         self.canvas.bind("<Enter>", lambda e: self._bind_mousewheel())
         self.canvas.bind("<Leave>", lambda e: self._unbind_mousewheel())
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
