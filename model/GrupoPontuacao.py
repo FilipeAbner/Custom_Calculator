@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from CampoItem import CampoItem
+from model.CampoItem import CampoItem
 
 class GrupoPontuacao:
     def __init__(self, parent, nome, remove_callback):

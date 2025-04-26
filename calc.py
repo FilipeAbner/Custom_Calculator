@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import datetime
-from CampoItem import CampoItem
-from Grupo import GrupoPontuacao
+from model.CampoItem import CampoItem
+from model.GrupoPontuacao import GrupoPontuacao
 
 class App:
     def __init__(self, root):
