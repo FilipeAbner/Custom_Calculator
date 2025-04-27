@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from model.item import ItemField
+from src.model.item import ItemField
 
 class ScoreGroup:
     def __init__(self, parent, name, remove_callback):

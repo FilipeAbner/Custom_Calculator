@@ -2,9 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 
-from ui.control_panel import ControlPanel
-from ui.pagination import Pagination
-from model.group_manager import GroupManager
+from src.ui.control_panel import ControlPanel
+from src.ui.pagination import Pagination
+from src.model.group_manager import GroupManager
 
 class App:
     def __init__(self, root):
