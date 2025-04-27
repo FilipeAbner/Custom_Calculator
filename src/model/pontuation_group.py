@@ -1,15 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
-from model.item import CampoItem
+from model.item import ItemField
 
-class GrupoPontuacao:
-    def __init__(self, parent, nome, remove_callback):
-        self.frame = ttk.LabelFrame(parent, text=nome)
-        self.campos = []
+class ScoreGroup:
+    def __init__(self, parent, name, remove_callback):
+        self.frame = ttk.LabelFrame(parent, text=name)
+        self.fields = []
         self.total_var = tk.StringVar(value="Total: 0")
         self.remove_callback = remove_callback
 
-        # Área rolável de campos
+        # Scrollable area for fields
         self.canvas = tk.Canvas(self.frame, borderwidth=0)
         self.scrollbar = ttk.Scrollbar(self.frame, orient="vertical", command=self.canvas.yview)
         self.scrollable_frame = ttk.Frame(self.canvas)
@@ -31,23 +31,23 @@ class GrupoPontuacao:
     def pack(self, **kwargs):
         self.frame.pack(**kwargs)
 
-    def adicionar_campo(self, pontuacao_fixa=None, titulo="New Item", quantidade=0):
-        campo = CampoItem(
+    def add_field(self, fixed_score=None, title="New Item", quantity=0):
+        field = ItemField(
             self.scrollable_frame,
-            remove_callback=self.remover_campo,
-            pontuacao_fixa=pontuacao_fixa,
-            titulo=titulo,
-            quantidade=quantidade
+            remove_callback=self.remove_field,
+            fixed_score=fixed_score,
+            title=title,
+            quantity=quantity
         )
-        campo.pack(pady=2, anchor='center')
-        self.campos.append(campo)
+        field.pack(pady=2, anchor='center')
+        self.fields.append(field)
 
-    def remover_campo(self, campo):
-        self.campos.remove(campo)
-        self.calcular_total()
+    def remove_field(self, field):
+        self.fields.remove(field)
+        self.calculate_total()
 
-    def calcular_total(self):
-        total = sum(c.calcular() for c in self.campos)
+    def calculate_total(self):
+        total = sum(f.calculate() for f in self.fields)
         if total == int(total):
             self.total_var.set(f"Total: {int(total):,}".replace(",", "."))
         else:
@@ -55,7 +55,7 @@ class GrupoPontuacao:
                 f"Total: {total:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
             )
 
-    def remover_grupo(self):
+    def remove_group(self):
         self.frame.destroy()
         if self.remove_callback:
             self.remove_callback(self)
