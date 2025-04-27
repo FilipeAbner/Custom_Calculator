@@ -1,8 +1,8 @@
-from model.pontuation_group import GrupoPontuacao
+from model.pontuation_group import ScoreGroup
 from util.starter_pages import add_default_fields
 
 
-class GerenciadorGrupos:
+class GroupManager:
     def __init__(
         self,
         parent_frame,
@@ -15,45 +15,45 @@ class GerenciadorGrupos:
         self.remove_state_listener = remove_state_listener
         self.pagination_listener = pagination_listener
 
-        self.paginas = {}
+        self.pages = {}
         self.current_num = None
-        self.pagina_atual = None
-        self.ultima_pagina = 7
+        self.current_page = None
+        self.last_page = 7
 
     def init_pages(self):
         for i in range(1, 8):
             self._add_page(i, f"UC Day {i}")
-            page = self.paginas[i]
+            page = self.pages[i]
             add_default_fields(i, page)
 
     def _add_page(self, num, title):
-        grp = GrupoPontuacao(
+        grp = ScoreGroup(
             self.parent_frame,
-            nome=title,
+            name=title,
             remove_callback=(lambda g, n=num: self.remove_group(n))
         )
         grp.frame.pack_forget()
-        self.paginas[num] = grp
+        self.pages[num] = grp
 
     def show_page(self, num):
-        if self.pagina_atual:
-            self.pagina_atual.frame.pack_forget()
+        if self.current_page:
+            self.current_page.frame.pack_forget()
         self.current_num = num
-        self.pagina_atual = self.paginas[num]
-        self.pagina_atual.frame.pack(fill="both", expand=True)
+        self.current_page = self.pages[num]
+        self.current_page.frame.pack(fill="both", expand=True)
         self._notify_total()
         self._notify_remove_state()
         self._notify_pagination()
 
-    def adicionar_campo(self):
-        if self.pagina_atual:
-            self.pagina_atual.adicionar_campo()
+    def add_field(self):
+        if self.current_page:
+            self.current_page.add_field()
 
-    def calcular_total(self):
-        if self.pagina_atual:
-            self.pagina_atual.calcular_total()
+    def calculate_total(self):
+        if self.current_page:
+            self.current_page.calculate_total()
             if self.total_listener:
-                self.total_listener(self.pagina_atual.total_var.get())
+                self.total_listener(self.current_page.total_var.get())
 
     def remove_current_group(self):
         if self.current_num:
@@ -62,14 +62,14 @@ class GerenciadorGrupos:
     def remove_group(self, num):
         if num <= 7:
             return
-        grp = self.paginas.pop(num)
+        grp = self.pages.pop(num)
         grp.frame.destroy()
         if num == self.current_num:
-            pages = sorted(self.paginas.keys())
+            pages = sorted(self.pages.keys())
             next_page = None
             for off in range(1, len(pages) + 2):
                 for candidate in (num + off, num - off):
-                    if candidate in self.paginas:
+                    if candidate in self.pages:
                         next_page = candidate
                         break
                 if next_page:
@@ -79,26 +79,26 @@ class GerenciadorGrupos:
         self._notify_pagination()
 
     def prev_page(self):
-        pages = sorted(self.paginas.keys())
+        pages = sorted(self.pages.keys())
         idx = pages.index(self.current_num)
         if idx > 0:
             self.show_page(pages[idx - 1])
 
     def next_page(self):
-        pages = sorted(self.paginas.keys())
+        pages = sorted(self.pages.keys())
         idx = pages.index(self.current_num)
         if idx < len(pages) - 1:
             self.show_page(pages[idx + 1])
 
-    def criar_novo_grupo(self):
-        self.ultima_pagina += 1
-        num = self.ultima_pagina
+    def create_new_group(self):
+        self.last_page += 1
+        num = self.last_page
         self._add_page(num, f"Group {num}")
         self.show_page(num)
 
     def _notify_total(self):
         if self.total_listener:
-            self.total_listener(self.pagina_atual.total_var.get())
+            self.total_listener(self.current_page.total_var.get())
 
     def _notify_remove_state(self):
         if self.remove_state_listener:
@@ -107,4 +107,4 @@ class GerenciadorGrupos:
 
     def _notify_pagination(self):
         if self.pagination_listener:
-            self.pagination_listener(self.paginas.keys(), self.current_num)
+            self.pagination_listener(self.pages.keys(), self.current_num)
