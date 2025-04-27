@@ -1,4 +1,4 @@
-from model.pontuation_group import ScoreGroup
+from src.model.score_group import ScoreGroup
 from util.starter_pages import add_default_fields
 
 
