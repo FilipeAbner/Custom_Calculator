@@ -15,7 +15,7 @@ class Pagination(ttk.Frame):
         self.scroll_frame = ttk.Frame(self.canvas)
         self.canvas_window = self.canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
 
-        # Centraliza botões ao redimensionar
+        # Centers buttons when resized
         self.canvas.bind("<Configure>", lambda e: self._center_pagination())
         self.scroll_frame.bind("<Configure>", lambda e: self._center_pagination())
 
@@ -23,10 +23,10 @@ class Pagination(ttk.Frame):
         self.next_btn.pack(side="left", padx=5)
 
         self.select_callback = select_callback
-        self.botoes = {}
+        self.buttons = {}
 
     def update_buttons(self, pages, current):
-        """Atualiza os botões de paginação de acordo com as páginas disponíveis."""
+        """Updates the pagination buttons according to the available pages."""
         for widget in self.scroll_frame.winfo_children():
             widget.destroy()
 
@@ -43,7 +43,7 @@ class Pagination(ttk.Frame):
             else:
                 btn.config(fg='black')
             btn.pack(side="left", padx=2)
-            self.botoes[num] = btn
+            self.buttons[num] = btn
 
         def add_ellipsis():
             lbl = tk.Label(self.scroll_frame, text="...", width=3)
