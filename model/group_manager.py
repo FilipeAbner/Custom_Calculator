@@ -1,4 +1,6 @@
-from model.pontuationGroup import GrupoPontuacao
+from model.pontuation_group import GrupoPontuacao
+from util.starter_pages import add_default_fields
+
 
 class GerenciadorGrupos:
     def __init__(
@@ -20,14 +22,9 @@ class GerenciadorGrupos:
 
     def init_pages(self):
         for i in range(1, 8):
-            self._add_page(i, f"Dia {i}")
-            if i == 6:
-                page = self.paginas[i]
-                page.adicionar_campo(pontuacao_fixa=300, titulo="Engine Frigate")
-                page.adicionar_campo(pontuacao_fixa=3000, titulo="Reflit Frigate")
-                page.adicionar_campo(pontuacao_fixa=1/100, titulo="Intel")
-                page.adicionar_campo(pontuacao_fixa=2000, titulo="UnderSea Cavern")
-                page.adicionar_campo(pontuacao_fixa=30, titulo="Diamond")
+            self._add_page(i, f"UC Day {i}")
+            page = self.paginas[i]
+            add_default_fields(i, page)
 
     def _add_page(self, num, title):
         grp = GrupoPontuacao(

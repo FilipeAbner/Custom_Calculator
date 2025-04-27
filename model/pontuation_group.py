@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from model.Item import CampoItem
+from model.item import CampoItem
 
 class GrupoPontuacao:
     def __init__(self, parent, nome, remove_callback):
@@ -68,7 +68,7 @@ class GrupoPontuacao:
     def _linux_scroll(self, event):
         region = self.canvas.bbox("all")
         if region and (region[3] - region[1] > self.canvas.winfo_height()):
-            delta = -1 if event.num == 5 else 1
+            delta = 1 if event.num == 5 else -1
             self.canvas.yview_scroll(delta, "units")
 
     def _bind_mousewheel(self):

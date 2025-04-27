@@ -28,7 +28,7 @@ class CampoItem:
         ttk.Label(self.frame, text="x").grid(row=0, column=2)
         self.qty_entry = ttk.Entry(
             self.frame,
-            width=8,
+            width=12,
             textvariable=self.qty_var,
             justify="center"
         )
