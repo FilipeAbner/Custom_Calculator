@@ -23,10 +23,10 @@ class ControlPanel(ttk.Frame):
         self.lbl_total.pack(pady=3)
 
     def update_total(self, total_text):
-        """Atualiza o texto do total exibido."""
+        """Updates the displayed total text."""
         self.lbl_total.config(text=total_text)
 
     def update_remove_state(self, enabled):
-        """Ativa ou desativa o botão de remover grupo."""
+        """Enables or disables the remove group button."""
         state = "normal" if enabled else "disabled"
         self.btn_remove.config(state=state)
