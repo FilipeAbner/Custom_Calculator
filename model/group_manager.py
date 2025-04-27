@@ -93,7 +93,7 @@ class GerenciadorGrupos:
     def criar_novo_grupo(self):
         self.ultima_pagina += 1
         num = self.ultima_pagina
-        self._add_page(num, f"Grupo {num}")
+        self._add_page(num, f"Group {num}")
         self.show_page(num)
 
     def _notify_total(self):

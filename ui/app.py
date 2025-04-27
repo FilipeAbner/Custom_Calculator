@@ -9,7 +9,7 @@ from model.group_manager import GerenciadorGrupos
 class App:
     def __init__(self, root):
         self.root = root
-        self.root.title("Calculadora de Pontuação por Grupos")
+        self.root.title("Group Scoring Calculator")
         self.root.geometry("800x600")
         self.root.resizable(False, False)
 
@@ -44,7 +44,7 @@ class App:
         # Botão para novo grupo
         self.btn_novo_grupo = tk.Button(
             root,
-            text="+ Novo Grupo",
+            text="+ New Group",
             command=self.gerenciador.criar_novo_grupo,
             bg="#4CAF50",
             fg="white"

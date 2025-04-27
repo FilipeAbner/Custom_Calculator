@@ -31,7 +31,7 @@ class GrupoPontuacao:
     def pack(self, **kwargs):
         self.frame.pack(**kwargs)
 
-    def adicionar_campo(self, pontuacao_fixa=None, titulo="Novo item", quantidade=0):
+    def adicionar_campo(self, pontuacao_fixa=None, titulo="New Item", quantidade=0):
         campo = CampoItem(
             self.scrollable_frame,
             remove_callback=self.remover_campo,

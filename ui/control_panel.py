@@ -9,13 +9,13 @@ class ControlPanel(ttk.Frame):
         btn_frame = ttk.Frame(self)
         btn_frame.pack()
 
-        self.btn_add = ttk.Button(btn_frame, text="Adicionar Campo", command=add_callback)
+        self.btn_add = ttk.Button(btn_frame, text="Add Field", command=add_callback)
         self.btn_add.pack(side="left", padx=5)
 
-        self.btn_calc = ttk.Button(btn_frame, text="Calcular Total", command=calculate_callback)
+        self.btn_calc = ttk.Button(btn_frame, text="Calculate Total", command=calculate_callback)
         self.btn_calc.pack(side="left", padx=5)
 
-        self.btn_remove = ttk.Button(btn_frame, text="Remover Grupo", command=remove_callback)
+        self.btn_remove = ttk.Button(btn_frame, text="Remove Group", command=remove_callback)
         self.btn_remove.pack(side="left", padx=5)
         self.btn_remove.config(state="disabled")
 
